@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load static %}
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <div class="container">
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> {{ contact_info.office_address }}</p>
+            <p><i class="fas fa-phone-alt"></i> {{ contact_info.phone_number }}</p>
+            <p><i class="fas fa-envelope"></i> {{ contact_info.email }}</p>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2 class="text-center">Your Message</h2>
+        {% if message %}
+            <div class="alert alert-success mt-3">{{ message }}</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+  
+</section>
+  <h1 id="p1">hello</h1>
+{% endblock %}

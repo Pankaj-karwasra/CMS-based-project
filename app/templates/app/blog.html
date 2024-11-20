@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<section id="blog" class="blog section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest Blog Posts</h2>
+        
+        
+        <div class="row justify-content-center">
+            {% if data %}
+                {% for d in data %}
+               
+                <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm" style="width: 100%;">
+                       
+                        <img src="{{ d.image.url }}" class="card-img-top" alt="{{ d.title }}" style="height: 200px; object-fit: cover;">
+                        
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">{{ d.title }}</h5>
+                            <small class="text-muted">By: {{ d.author }} | Posted on: {{ d.date }}</small>
+                            <p class="card-text mt-3">{{ d.description|truncatewords:20 }}<span><a href="{% url 'full_blog' d.id %}">
+                                <button class="btn">Read more</button>
+                            </a></span></p>
+                            <span class="badge bg-primary">{{ d.category }}</span>
+                            
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center text-muted">No blog posts available.</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'add_blog' %}">
+                <button type="button" class="btn btn-success">Add Blog</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
+
